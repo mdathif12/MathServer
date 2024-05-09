@@ -1,5 +1,5 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:
+## Date: 09-05-24
 
 ## AIM:
 To design a website to find surface area of a Right Cylinder in server side.
@@ -9,7 +9,7 @@ Surface Area = 2Πrh + 2Πr<sup>2</sup>
 <br>r --> Radius of Right Cylinder
 <br>h --> Height of Right Cylinder
 
-## DESIGN STEPS:
+## DESIGN STEPS: 
 
 ### Step 1:
 Clone the repository from GitHub.
@@ -30,12 +30,115 @@ Create a HTML file to implement form based input and output.
 Publish the website in the given URL.
 
 ## PROGRAM :
+math.html
+```
+math.html
 
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<title>Surface area of Right Cylinder</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<style type="text/css">
+body 
+{
+background-color:rgb(22, 223, 223);
+}
+.edge {
+width: 1440px;
+margin-left: auto;
+margin-right: auto;
+padding-top: 250px;
+padding-left: 300px;
+}
+.formelt{
+color:rgb(30, 36, 85);
+text-align: center;
+margin-top: 7px;
+margin-bottom: 6px;
+}
+h1
+{
+color:rgb(23, 150, 235);
+text-align: center;
+padding-top: 20px;
+}
+.name
+{
+    color:rgb(49, 6, 59);
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="edge">
+<div class="box">
+<h3 class="name">Mohamed Athif Rahuman J(212223220058)</h3>
+<h1>Surface area of Right Cylinder</h1>
+<div class="formelt">
+Radius : <input type="text" name="radius" value="{{r}}"></input>(in m)<br/>
+</div>
+<div class="formelt">
+Height : <input type="text" name="height" value="{{h}}"></input>(in m)<br/>
+</div>
+<div class="formelt">
+<input type="submit" value="Calculate"></input><br/>
+</div>
+<div class="formelt">
+Area : <input type="text" name="area" value="{{area}}"></input>m<sup>2</sup><br/>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>
 
+```
+views.py
+```
+from django.shortcuts import render
+def surfacearea(request):
+    context={}
+    context['area'] = "0"
+    context['r'] = "0"
+    context['h'] = "0"
+    if request.method == 'POST':
+        print("POST method is used")
+        r = request.POST.get('radius','0')
+        h = request.POST.get('height','0')
+        print('request=',request)
+        print('Radius=',r)
+        print('Height=',h)
+        area = (2*3.14*int(r) * int(h))+(2*3.14*int(r)*int(r))
+        context['area'] = area
+        context['r'] = r
+        context['h'] = h
+        print('Area=',area)
+    return render(request,'mathapp/math.html',context)
+```
+urls.py
+```
+from django.contrib import admin
+from django.urls import path
+from mathapp import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('surfacearea/',views.surfacearea,name="surfacearea"),
+    path('',views.surfacearea,name="surfacearearoot")
+]
+```
 ## SERVER SIDE PROCESSING:
+
+![image](https://github.com/mdathif12/MathServer/assets/149365313/9b065899-7d49-4e62-8289-f8fb21143a80)
+
+
 
 
 ## HOMEPAGE:
+
+![image](https://github.com/aswethaashok/MathServer/assets/149987410/9964aeaf-9f91-46ef-8123-23289f13bd52)
+
 
 
 ## RESULT:
